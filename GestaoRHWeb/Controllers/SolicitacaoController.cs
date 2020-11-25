@@ -23,6 +23,7 @@ namespace GestaoRHWeb.Controllers
 
         public IActionResult Index()
         {
+            //Teste
             //Implementar os números dos itens do carrinho
             //ViewBag.ListaCount = _itemSolicitacaoDAO.Count();
 
