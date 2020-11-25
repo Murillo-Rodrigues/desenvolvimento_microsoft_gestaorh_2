@@ -23,7 +23,9 @@ namespace GestaoRHWeb.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.ListaCount = _itemSolicitacaoDAO.Count();
+            //Implementar os números dos itens do carrinho
+            //ViewBag.ListaCount = _itemSolicitacaoDAO.Count();
+
             ViewBag.ListarProntuarios = _prontuarioDAO.Listar();
             return View(_itemSolicitacaoDAO.ListarPorCarrinhoId(_sessao.BuscarCarrinhoId()));
         }
