@@ -1,0 +1,38 @@
+﻿@*Tecnologia de View - Razor*@
+@model List<Caixa>
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+<br />
+<br />
+<br />
+
+<fieldset>
+    <table class="table table-hover table-striped table-bordered">
+        <thead>
+            <tr class="table-info">
+                <th scope="row">#</th>
+                <th scope="col">NumeroCaixa</th>
+                <th scope="col">Custódia</th>
+                <th scope="col">Criado em</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Caixa caixaCadastrada in Model)
+            {
+<tr>
+    <td>@caixaCadastrada.Id</td>
+    <td>@caixaCadastrada.NumeroCaixa</td>
+    <td>@caixaCadastrada.Custodia</td>
+    <td>@caixaCadastrada.CriadoEm</td>
+    <td><a asp-action="Remover" asp-controller="Caixa" asp-route-id="@caixaCadastrada.Id"> Remover</a></td>
+    <td><a asp-action="Alterar" asp-controller="Caixa" asp-route-id="@caixaCadastrada.Id"> Alterar</a></td>
+</tr>
+}
+        </tbody>
+    </table>
+</fieldset>
+
+<p><b>Quantidade de Registros: </b>@Model.Count</p>
+<p><b>Atualizado em:</b>@DateTime.Now</p>

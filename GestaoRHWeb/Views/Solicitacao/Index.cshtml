@@ -1,0 +1,71 @@
+﻿@model IEnumerable<GestaoRHWeb.Models.ItemSolicitacao>
+@*List<Prontuario>*@
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Prontuario> listaItem = ViewBag.ListarProntuarios;}
+<br />
+<br />
+<br />
+
+<fieldset>
+    <legend>Solicitar Prontuários</legend>
+
+    <div class="form-row">
+        <div id="prontuarios" class="col-4">
+            @foreach (Prontuario prontuarioCadastrado in listaItem)
+            {
+<div class="form-group col-md-6 solicitacao">
+    <span><b>Matrícula: </b>@prontuarioCadastrado.Funcionario.Matricula</span><br />
+    <span><b>Custódia: </b>@prontuarioCadastrado.Caixa.Custodia</span>
+    <br />
+    <a class="btn btn-primary" asp-action="AdicionarAoCarrinho"
+       asp-controller="Solicitacao"
+       asp-route-id="@prontuarioCadastrado.Id">
+        Solicitar
+    </a>
+</div>}
+
+        </div>
+        <div class="form-group col-8">
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                    <tr class="table-info">
+                        <th scope="row">#</th>
+                        <th scope="col">Prontuario ID</th>
+                        <th scope="col">Matrícula Vinculada</th>
+                        <th scope="col">Custódia Vinculada</th>
+                        <th scope="col">Criado em</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ItemSolicitacao itens in Model)
+                    {
+        <tr>
+            <td>@itens.Id</td>
+            <td>@itens.Prontuario.Id</td>
+            <td>@itens.Matricula</td>
+            <td>@itens.Custodia</td>
+            <td>@itens.CriadoEm</td>
+            <td><a asp-action="Remover" asp-controller="Solicitacao" asp-route-id="@itens.Id"> Remover</a></td>
+        </tr>
+}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</fieldset>
+
+
+@*<div id="prontuarios" class="row">
+            @foreach (Prontuario prontuarioCadastrado in Model)
+            {
+    <div class="form-group col-sm-3 solicitacao">
+        <span><b>Matrícula: </b>@prontuarioCadastrado.Funcionario.Matricula</span><br />
+        <span><b>Custódia: </b>@prontuarioCadastrado.Caixa.Custodia</span>
+        <br />
+        <input type="submit" value="Solicitar" class="btn btn-primary" />
+    </div>}
+        </div>
+    </fieldset>*@

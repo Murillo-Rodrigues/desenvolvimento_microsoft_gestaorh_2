@@ -1,0 +1,33 @@
+﻿@model Prontuario
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+<br />
+<br />
+<br />
+
+
+<form asp-action="Cadastrar" asp-controller="Prontuario" method="post">
+    <fieldset>
+        <legend>Cadastro de Prontuários</legend>
+
+        <div asp-validation-summary="ModelOnly" class="alert alert-warning"></div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="FuncionarioId">Matrículas:</label>
+                <select asp-items="@ViewBag.listaMatriculas" asp-for="FuncionarioId" class="form-control">
+                    <option> -- SELECIONE -- </option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="CaixaId">Custódias:</label>
+                <select asp-items="@ViewBag.listaCustodias" asp-for="CaixaId" class="form-control">
+                    <option> -- SELECIONE -- </option>
+                </select>
+            </div>
+        </div>
+        <input type="submit" value="Cadastrar" class="btn btn-primary" />
+    </fieldset>
+</form>
+<br />
+<br />

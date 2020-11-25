@@ -1,0 +1,39 @@
+﻿@model Funcionario
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<br />
+<br />
+<br />
+
+<form asp-action="Alterar" asp-controller="Funcionario" method="post">
+    <fieldset>
+        <legend>Alterar Funcionário</legend>
+
+        <div class="form-group">
+            <label asp-for="Id">Id:</label>
+            <input asp-for="Id" type="text" placeholder="Id do funcionário" readonly class="form-control" />
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="Matricula">Matrícula:</label>
+                <input asp-for="Matricula" type="text" placeholder="Insira a matrícula de funcionário" class="form-control" />
+                <span asp-validation-for="Matricula"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="Cpf">CPF:</label>
+                <input asp-for="Cpf" type="text" placeholder="Insira o CPF do funcionário" class="form-control" />
+                <span asp-validation-for="Cpf"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Nome">Nome:</label>
+            <input asp-for="Nome" type="text" placeholder="Insira o nome de funcionário" class="form-control" />
+            <span asp-validation-for="Nome"></span>
+        </div>
+
+        <input type="submit" value="Salvar" class="btn btn-primary" />
+    </fieldset>
+</form>
+<br />
+<br />
