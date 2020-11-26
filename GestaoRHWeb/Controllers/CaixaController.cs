@@ -35,6 +35,7 @@ namespace GestaoRHWeb.Controllers
             {
                 if (_caixaDAO.Cadastrar(caixa))
                 {
+                    TempData["msg"] = "<script>alert('Caixa cadastrada com sucesso!');</script>";
                     return RedirectToAction("Index", "Caixa");
                 }
                 ModelState.AddModelError("", "Não foi possível cadastrar a caixa!");

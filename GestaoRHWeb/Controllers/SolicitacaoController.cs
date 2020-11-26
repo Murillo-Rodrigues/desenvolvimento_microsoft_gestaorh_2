@@ -26,7 +26,7 @@ namespace GestaoRHWeb.Controllers
             //Teste Branch Support
             //Teste
             //Implementar os números dos itens do carrinho
-            //ViewBag.ListaCount = _itemSolicitacaoDAO.Count();
+            //ViewBag.Count = _itemSolicitacaoDAO.Count();
 
             ViewBag.ListarProntuarios = _prontuarioDAO.Listar();
             return View(_itemSolicitacaoDAO.ListarPorCarrinhoId(_sessao.BuscarCarrinhoId()));
@@ -68,6 +68,18 @@ namespace GestaoRHWeb.Controllers
             Prontuario procurarProntuarioComDados = _prontuarioDAO.BuscarPorIdFuncionarioECaixa(itemSolicitacao.Prontuario.Id);
             _prontuarioDAO.Alterar(procurarProntuarioComDados);
             _itemSolicitacaoDAO.Remover(id);
+            return RedirectToAction("Index", "Solicitacao");
+        }
+
+        public IActionResult RegistrarSolicitacao(ItemSolicitacao itens)
+        {
+            Solicitacao s = new Solicitacao();
+            s.Itens.Add(
+                new ItemSolicitacao
+                {
+                    Prontuario = itens.Prontuario
+                });
+
             return RedirectToAction("Index", "Solicitacao");
         }
     }

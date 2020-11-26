@@ -34,7 +34,7 @@ namespace GestaoRHWeb.Controllers
             {
                 if (_funcionarioDAO.Cadastrar(funcionario))
                 {
-                    TempData["msg"] = "<script>alert('Cadastro realizado com sucesso!');</script>";
+                    TempData["msg"] = "<script>alert('Funcionário cadastrado com sucesso!');</script>";
                     return RedirectToAction("Index", "Funcionario");
                 }
                 ModelState.AddModelError("", "Não foi possível cadastrar o funcionário! Já existe um funcionário com a mesma matrícula na base de dados");
