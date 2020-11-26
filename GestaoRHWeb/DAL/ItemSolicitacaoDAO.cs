@@ -12,6 +12,10 @@ namespace GestaoRHWeb.DAL
         public ItemSolicitacaoDAO(Context context) => _context = context;
 
         public ItemSolicitacao BuscarPorId(int id) => _context.ItensSolicitacao.Find(id);
+        public ItemSolicitacao BuscarDados(int id) =>
+            _context.ItensSolicitacao.
+            Include(x => x.Prontuario).
+            FirstOrDefault(x => x.Id == id);
         public void Cadastrar(ItemSolicitacao item)
         {
             _context.ItensSolicitacao.Add(item);
@@ -30,5 +34,10 @@ namespace GestaoRHWeb.DAL
             _context.ItensSolicitacao.Remove(BuscarPorId(id));
             _context.SaveChanges();
         }
+
+        public List<ItemSolicitacao> Listar() =>
+            _context.ItensSolicitacao.
+            Include(x => x.Prontuario).
+            ToList();
     }
 }

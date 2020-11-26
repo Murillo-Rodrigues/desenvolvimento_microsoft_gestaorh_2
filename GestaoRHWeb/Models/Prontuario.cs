@@ -9,6 +9,7 @@ namespace GestaoRHWeb.Models
         {
             Funcionario = new Funcionario();
             Caixa = new Caixa();
+            Status = "Disponivel";
         }
 
         [ForeignKey("FuncionarioId")]
@@ -18,6 +19,8 @@ namespace GestaoRHWeb.Models
         [ForeignKey("CaixaId")]
         public Caixa Caixa { get; set; }
         public int CaixaId { get; set; }
+
+        public string Status { get; set; }
 
     }
 }

@@ -22,7 +22,17 @@
             {
 <div class="form-group col-md-6 solicitacao">
     <span><b>Matrícula: </b>@prontuarioCadastrado.Funcionario.Matricula</span><br />
-    <span><b>Custódia: </b>@prontuarioCadastrado.Caixa.Custodia</span>
+    <span><b>Custódia: </b>@prontuarioCadastrado.Caixa.Custodia</span><br />
+
+
+    @{ if (prontuarioCadastrado.Status == "Disponivel")
+        {
+<span style="color:lawngreen"><b style="color:white">Status: </b>@prontuarioCadastrado.Status</span> }
+else
+{
+<span style="color:red"><b style="color:white">Status: </b>@prontuarioCadastrado.Status</span> } }
+
+
     <br />
     <a class="btn btn-primary" asp-action="AdicionarAoCarrinho"
        asp-controller="Solicitacao"

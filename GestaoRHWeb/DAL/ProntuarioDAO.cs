@@ -41,11 +41,12 @@ namespace GestaoRHWeb.DAL
             return false;
         }
 
-        public bool Remover(Prontuario prontuario)
+        public bool Remover(Prontuario p)
         {
-            if (BuscarPorProntuarioSolicitado(prontuario.Id) == null)
+
+            if (BuscarPorProntuarioSolicitado(p.Id) == null)
             {
-                _context.Prontuarios.Remove(prontuario);
+                _context.Prontuarios.Remove(p);
                 _context.SaveChanges();
                 return true;
             }

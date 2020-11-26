@@ -12,6 +12,7 @@
                 <th scope="row">#</th>
                 <th scope="col">Matrícula Vinculada</th>
                 <th scope="col">Custódia Vinculada</th>
+                <th scope="col">Status</th>
                 <th scope="col">Criado em</th>
                 <th></th>
                 <th></th>
@@ -24,6 +25,13 @@
     <td>@prontuarioCadastrado.Id</td>
     <td>@prontuarioCadastrado.Funcionario.Matricula</td>
     <td>@prontuarioCadastrado.Caixa.Custodia</td>
+    @{ if (prontuarioCadastrado.Status == "Disponivel")
+        {
+<td style="color:lawngreen; -webkit-text-stroke:0.5px black;">@prontuarioCadastrado.Status</td>
+ }
+else
+{
+<td style="color:red">@prontuarioCadastrado.Status</td> } }
     <td>@prontuarioCadastrado.CriadoEm</td>
     <td><a asp-action="Remover" asp-controller="Prontuario" asp-route-id="@prontuarioCadastrado.Id" class="btn btn-danger"> Remover</a></td>
     <td><a asp-action="Alterar" asp-controller="Prontuario" asp-route-id="@prontuarioCadastrado.Id" class="btn btn-warning"> Alterar</a></td>

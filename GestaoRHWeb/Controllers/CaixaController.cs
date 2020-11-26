@@ -62,17 +62,20 @@ namespace GestaoRHWeb.Controllers
         /* ------------------- ALTERAR ------------------- */
         public IActionResult Alterar(int id)
         {
-
             return View(_caixaDAO.BuscarPorId(id));
         }
-
 
         [HttpPost]
 
         public IActionResult Alterar(Caixa caixa)
         {
-            _caixaDAO.Alterar(caixa);
-            return RedirectToAction("Index", "Caixa");
+            if (ModelState.IsValid)
+            {
+                _caixaDAO.Alterar(caixa);
+                TempData["msg"] = "<script>alert('Alteração realizada com sucesso!');</script>";
+                return RedirectToAction("Index", "Funcionario");
+            }
+            return View(caixa);
         }
 
 

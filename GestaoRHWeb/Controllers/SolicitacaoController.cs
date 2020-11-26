@@ -35,24 +35,38 @@ namespace GestaoRHWeb.Controllers
         public IActionResult AdicionarAoCarrinho(int id)
         {
             Prontuario prontuario = _prontuarioDAO.BuscarPorIdFuncionarioECaixa(id);
-            ItemSolicitacao item = new ItemSolicitacao
-            {
-                Prontuario = prontuario,
-                Matricula = prontuario.Funcionario.Matricula,
-                Custodia = prontuario.Caixa.Custodia,
-                CarrinhoId = _sessao.BuscarCarrinhoId()
-            };
-            _itemSolicitacaoDAO.Cadastrar(item);
 
+            if (prontuario.Status == "Em Solicitação")
+            {
+                TempData["msg"] = "<script>alert('Não é possível solicitar um Prontuário uma vez que este já se encontra em estado de solicitação!');</script>";
+            }
+            else
+            {
+                prontuario.Status = "Em Solicitação";
+                ItemSolicitacao item = new ItemSolicitacao
+                {
+                    Prontuario = prontuario,
+                    Matricula = prontuario.Funcionario.Matricula,
+                    Custodia = prontuario.Caixa.Custodia,
+                    CarrinhoId = _sessao.BuscarCarrinhoId()
+                };
+                _itemSolicitacaoDAO.Cadastrar(item);
+            }
             return RedirectToAction("Index", "Solicitacao");
         }
-        public IActionResult CarrinhoCompras()
+
+        public IActionResult Status()
         {
-            return View(_itemSolicitacaoDAO.ListarPorCarrinhoId(_sessao.BuscarCarrinhoId()));
+            //return View(_itemSolicitacaoDAO.ListarPorCarrinhoId(_sessao.BuscarCarrinhoId()));
+            return View(ViewBag.Listar = _itemSolicitacaoDAO.Listar());
         }
 
         public IActionResult Remover(int id)
         {
+            ItemSolicitacao itemSolicitacao = _itemSolicitacaoDAO.BuscarDados(id);
+            itemSolicitacao.Prontuario.Status = "Disponivel";
+            Prontuario procurarProntuarioComDados = _prontuarioDAO.BuscarPorIdFuncionarioECaixa(itemSolicitacao.Prontuario.Id);
+            _prontuarioDAO.Alterar(procurarProntuarioComDados);
             _itemSolicitacaoDAO.Remover(id);
             return RedirectToAction("Index", "Solicitacao");
         }
