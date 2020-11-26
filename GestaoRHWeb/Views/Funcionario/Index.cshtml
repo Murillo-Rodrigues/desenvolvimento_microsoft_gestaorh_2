@@ -5,8 +5,9 @@
 <br />
 <br />
 <br />
+
 <fieldset>
-    <table class="table table-hover table-striped table-bordered ">
+    <table class="table table-hover table-striped table-bordered table-sm" style="text-align:center">
         <thead>
             <tr class="table-info">
                 <th scope="row">#</th>
@@ -27,8 +28,8 @@
     <td>@funcionarioCadastrado.Cpf</td>
     <td>@funcionarioCadastrado.Nome</td>
     <td>@funcionarioCadastrado.CriadoEm</td>
-    <td><a asp-action="Remover" asp-controller="Funcionario" asp-route-id="@funcionarioCadastrado.Id"> Remover</a></td>
-    <td><a asp-action="Alterar" asp-controller="Funcionario" asp-route-id="@funcionarioCadastrado.Id"> Alterar</a></td>
+    <td><a asp-action="Remover" asp-controller="Funcionario" asp-route-id="@funcionarioCadastrado.Id" class="btn btn-danger">Remover</a></td>
+    <td><a asp-action="Alterar" asp-controller="Funcionario" asp-route-id="@funcionarioCadastrado.Id" class="btn btn-warning">Alterar</a></td>
 </tr>
 }
         </tbody>

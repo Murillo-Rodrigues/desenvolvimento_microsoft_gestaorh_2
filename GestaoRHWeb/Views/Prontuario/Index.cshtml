@@ -6,7 +6,7 @@
 <br />
 <br />
 <fieldset>
-    <table class="table table-hover table-striped table-bordered">
+    <table class="table table-hover table-striped table-bordered" style="text-align:center">
         <thead>
             <tr class="table-info">
                 <th scope="row">#</th>
@@ -25,10 +25,9 @@
     <td>@prontuarioCadastrado.Funcionario.Matricula</td>
     <td>@prontuarioCadastrado.Caixa.Custodia</td>
     <td>@prontuarioCadastrado.CriadoEm</td>
-    <td><a asp-action="Remover" asp-controller="Prontuario" asp-route-id="@prontuarioCadastrado.Id"> Remover</a></td>
-    <td><a asp-action="Alterar" asp-controller="Prontuario" asp-route-id="@prontuarioCadastrado.Id"> Alterar</a></td>
-</tr>
-}
+    <td><a asp-action="Remover" asp-controller="Prontuario" asp-route-id="@prontuarioCadastrado.Id" class="btn btn-danger"> Remover</a></td>
+    <td><a asp-action="Alterar" asp-controller="Prontuario" asp-route-id="@prontuarioCadastrado.Id" class="btn btn-warning"> Alterar</a></td>
+</tr>}
         </tbody>
     </table>
 </fieldset>

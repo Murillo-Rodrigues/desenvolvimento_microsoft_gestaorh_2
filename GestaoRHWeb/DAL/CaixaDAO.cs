@@ -13,6 +13,8 @@ namespace GestaoRHWeb.DAL
         public Caixa BuscarPorId(int id) => _context.Caixas.Find(id);
         public Caixa BuscarPorNumeroCaixa(string numeroCaixa) => _context.Caixas.FirstOrDefault(x => x.NumeroCaixa == numeroCaixa);
 
+        public Prontuario BuscarPorIdCaixaNoProntuario(int id) => _context.Prontuarios.FirstOrDefault(x => x.Caixa.Id == id);
+
         public bool Cadastrar(Caixa caixa)
         {
             if (BuscarPorNumeroCaixa(caixa.NumeroCaixa) == null)
@@ -25,10 +27,15 @@ namespace GestaoRHWeb.DAL
             return false;
         }
 
-        public void Remover(int id)
+        public bool Remover(Caixa c)
         {
-            _context.Caixas.Remove(BuscarPorId(id));
-            _context.SaveChanges();
+            if (BuscarPorIdCaixaNoProntuario(c.Id) == null)
+            {
+                _context.Caixas.Remove(c);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
         public void Alterar(Caixa caixa)

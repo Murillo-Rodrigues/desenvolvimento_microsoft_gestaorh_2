@@ -14,18 +14,18 @@
             <div class="form-group col-md-6">
                 <label asp-for="Matricula">Matrícula:</label>
                 <input asp-for="Matricula" type="text" placeholder="Insira a matrícula de funcionário" class="form-control" />
-                <span asp-validation-for="Matricula"></span>
+                <span asp-validation-for="Matricula" class="validacao"></span>
             </div>
             <div class="form-group col-md-6">
                 <label asp-for="Cpf">CPF:</label>
                 <input asp-for="Cpf" type="text" placeholder="Insira o CPF do funcionário" class="form-control" />
-                <span asp-validation-for="Cpf"></span>
+                <span asp-validation-for="Cpf" class="validacao"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Nome">Nome:</label>
             <input asp-for="Nome" type="text" placeholder="Insira o nome de funcionário" class="form-control" />
-            <span asp-validation-for="Nome"></span>
+            <span asp-validation-for="Nome" class="validacao"></span>
         </div>
 
         <input type="submit" value="Cadastrar" class="btn btn-primary" />

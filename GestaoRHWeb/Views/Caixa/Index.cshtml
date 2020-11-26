@@ -7,7 +7,7 @@
 <br />
 
 <fieldset>
-    <table class="table table-hover table-striped table-bordered">
+    <table class="table table-hover table-striped table-bordered" style="text-align:center">
         <thead>
             <tr class="table-info">
                 <th scope="row">#</th>
@@ -26,8 +26,8 @@
     <td>@caixaCadastrada.NumeroCaixa</td>
     <td>@caixaCadastrada.Custodia</td>
     <td>@caixaCadastrada.CriadoEm</td>
-    <td><a asp-action="Remover" asp-controller="Caixa" asp-route-id="@caixaCadastrada.Id"> Remover</a></td>
-    <td><a asp-action="Alterar" asp-controller="Caixa" asp-route-id="@caixaCadastrada.Id"> Alterar</a></td>
+    <td><a asp-action="Remover" asp-controller="Caixa" asp-route-id="@caixaCadastrada.Id" class="btn btn-danger"> Remover</a></td>
+    <td><a asp-action="Alterar" asp-controller="Caixa" asp-route-id="@caixaCadastrada.Id" class="btn btn-warning"> Alterar</a></td>
 </tr>
 }
         </tbody>

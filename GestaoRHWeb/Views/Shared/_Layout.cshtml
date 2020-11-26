@@ -20,6 +20,7 @@
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous" />
     <!--external css-->
     <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/lib/toastr.js/toastr.css" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="~/lib/gritter/css/jquery.gritter.css" />
     <!-- Custom styles for this template -->
@@ -74,7 +75,7 @@
                     <li id="header_notification_bar" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" asp-action="Index" asp-controller="Solicitacao">
                             <i class="fa fa-shopping-cart"></i>
-                            <span class="badge bg-info">@countCarrinho</span>
+                            @*<span class="badge bg-info"></span>*@
                         </a>
                         <!-- notification dropdown end -->
 
@@ -159,10 +160,12 @@
         *********************************************************************************************************************************************************** -->
         <!--main content start-->
         <section id="main-content">
+
+            @Html.Raw(TempData["msg"])
+
             <div class="div-conteudo">
                 @RenderBody()
             </div>
-
         </section>
         <!--main content end-->
         <!--footer start-->
@@ -190,6 +193,9 @@
     <!-- js placed at the end of the document so the pages load faster -->
     @*<script src="~lib/jquery/jquery.js"></script>*@
 
+
+
+
     <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="~/lib/jquery.dcjqaccordion.2.7.js"></script>
     <script src="~/lib/jquery.scrollTo.min.js"></script>
@@ -199,6 +205,9 @@
     <script src="~/lib/common-scripts.js"></script>
     <script type="text/javascript" src="~/lib/gritter/js/jquery.gritter.js"></script>
     <script type="text/javascript" src="~/lib/gritter-conf.js"></script>
+
+    <script src="~/lib/toastr.js/toastr.min.js"></script>
+
     <!--script for this page-->
     <script src="~/lib/sparkline-chart.js"></script>
     <script src="~/lib/zabuto_calendar.js"></script>

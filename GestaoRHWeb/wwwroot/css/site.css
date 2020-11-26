@@ -86,3 +86,9 @@ body {
     border-style: groove;
     border-width: thin;
 }
+
+.validacao {
+    color: red;
+    font-weight: 400;
+    font-size: 18px;
+}

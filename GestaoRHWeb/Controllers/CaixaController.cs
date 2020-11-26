@@ -45,7 +45,16 @@ namespace GestaoRHWeb.Controllers
         /* ------------------- REMOVER ------------------- */
         public IActionResult Remover(int id)
         {
-            _caixaDAO.Remover(id);
+            Caixa c = _caixaDAO.BuscarPorId(id);
+            if (_caixaDAO.Remover(c))
+            {
+                TempData["msg"] = "<script>alert('Caixa removida com sucesso!');</script>";
+            }
+            else
+            {
+                TempData["msg"] = "<script>alert('Não é possivel remover uma caixa com prontuários vinculados!');</script>";
+            }
+
             return RedirectToAction("Index", "Caixa");
         }
 

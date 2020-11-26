@@ -12,6 +12,8 @@ namespace GestaoRHWeb.DAL
         public Funcionario BuscarPorId(int id) => _context.Funcionarios.Find(id);
         public Funcionario BuscarPorMatricula(string matricula) => _context.Funcionarios.FirstOrDefault(x => x.Matricula == matricula);
 
+        public Prontuario BuscarPorIdFuncionarioNoProntuario(int id) => _context.Prontuarios.FirstOrDefault(x => x.Funcionario.Id == id);
+
         public bool Cadastrar(Funcionario funcionario)
         {
             if (BuscarPorMatricula(funcionario.Matricula) == null)
@@ -24,10 +26,15 @@ namespace GestaoRHWeb.DAL
             return false;
         }
 
-        public void Remover(int id)
+        public bool Remover(Funcionario f)
         {
-            _context.Funcionarios.Remove(BuscarPorId(id));
-            _context.SaveChanges();
+            if (BuscarPorIdFuncionarioNoProntuario(f.Id) == null)
+            {
+                _context.Funcionarios.Remove(f);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
         public void Alterar(Funcionario funcionario)

@@ -8,7 +8,13 @@
 <br />
 
 <fieldset>
-    <legend>Solicitar Prontuários</legend>
+    <legend>
+        Solicitar Prontuários
+        <a class="btn btn-primary" asp-action="RegistrarSolicitacao"
+           asp-controller="Solicitacao">
+            Registrar Solicitação
+        </a>
+    </legend>
 
     <div class="form-row">
         <div id="prontuarios" class="col-4">
@@ -27,7 +33,7 @@
 
         </div>
         <div class="form-group col-8">
-            <table class="table table-hover table-striped table-bordered">
+            <table class="table table-hover table-striped table-bordered" style="text-align:center">
                 <thead>
                     <tr class="table-info">
                         <th scope="row">#</th>
@@ -47,7 +53,7 @@
             <td>@itens.Matricula</td>
             <td>@itens.Custodia</td>
             <td>@itens.CriadoEm</td>
-            <td><a asp-action="Remover" asp-controller="Solicitacao" asp-route-id="@itens.Id"> Remover</a></td>
+            <td><a asp-action="Remover" asp-controller="Solicitacao" asp-route-id="@itens.Id" class="btn btn-danger"> Remover</a></td>
         </tr>
 }
                 </tbody>

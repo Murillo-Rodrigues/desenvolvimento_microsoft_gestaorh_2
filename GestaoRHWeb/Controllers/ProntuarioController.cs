@@ -70,9 +70,16 @@ namespace GestaoRHWeb.Controllers
 
         /* ------------------- REMOVER ------------------- */
         [HttpPost]
-        public IActionResult Remover(int id)
+        public IActionResult Remover(Prontuario prontuario)
         {
-            _prontuarioDAO.Remover(id);
+            if (_prontuarioDAO.Remover(prontuario))
+            {
+
+            }
+            else
+            {
+                ModelState.AddModelError("", "Erro! Prontuário está em solicitação e não pode ser excluído da base de dados!");
+            }
             return RedirectToAction("Index", "Prontuario");
         }
 

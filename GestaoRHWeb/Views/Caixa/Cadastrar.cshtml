@@ -15,12 +15,12 @@
             <div class="form-group col-md-6">
                 <label asp-for="NumeroCaixa">Número da Caixa:</label>
                 <input asp-for="NumeroCaixa" type="text" placeholder="Insira o número da Caixa" class="form-control" />
-                <span asp-validation-for="NumeroCaixa"></span>
+                <span asp-validation-for="NumeroCaixa" class="validacao"></span>
             </div>
             <div class="form-group col-md-6">
                 <label asp-for="Custodia">Posição da Custódia:</label>
                 <input asp-for="Custodia" type="text" placeholder="Insira a custódia da Caixa" class="form-control" />
-                <span asp-validation-for="Custodia"></span>
+                <span asp-validation-for="Custodia" class="validacao"></span>
             </div>
         </div>
         <input type="submit" value="Cadastrar" class="btn btn-primary" />

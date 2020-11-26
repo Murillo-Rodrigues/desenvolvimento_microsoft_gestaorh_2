@@ -23,6 +23,9 @@ namespace GestaoRHWeb.DAL
         public Prontuario BuscarPorIdFuncionarioECaixa(int id) =>
             _context.Prontuarios.Include(x => x.Funcionario).Include(x => x.Caixa).FirstOrDefault(x => x.Id == id);
 
+        public ItemSolicitacao BuscarPorProntuarioSolicitado(int id) =>
+            _context.ItensSolicitacao.FirstOrDefault(x => x.Prontuario.Id == id);
+
         public Prontuario BuscarPorId(int id) =>
             _context.Prontuarios.Find(id);
 
@@ -38,10 +41,15 @@ namespace GestaoRHWeb.DAL
             return false;
         }
 
-        public void Remover(int id)
+        public bool Remover(Prontuario prontuario)
         {
-            _context.Prontuarios.Remove(BuscarPorId(id));
-            _context.SaveChanges();
+            if (BuscarPorProntuarioSolicitado(prontuario.Id) == null)
+            {
+                _context.Prontuarios.Remove(prontuario);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
         public void Alterar(Prontuario prontuario)

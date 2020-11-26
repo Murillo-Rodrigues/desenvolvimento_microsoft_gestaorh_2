@@ -16,6 +16,7 @@ namespace GestaoRHWeb.Controllers
         /* ------------------- INDEX ------------------- */
         public IActionResult Index()
         {
+
             List<Funcionario> funcionarios = _funcionarioDAO.Listar();
             ViewBag.QuantidadeRegistros = funcionarios.Count();
             return View(funcionarios);
@@ -33,6 +34,7 @@ namespace GestaoRHWeb.Controllers
             {
                 if (_funcionarioDAO.Cadastrar(funcionario))
                 {
+                    TempData["msg"] = "<script>alert('Cadastro realizado com sucesso!');</script>";
                     return RedirectToAction("Index", "Funcionario");
                 }
                 ModelState.AddModelError("", "Não foi possível cadastrar o funcionário! Já existe um funcionário com a mesma matrícula na base de dados");
@@ -43,7 +45,16 @@ namespace GestaoRHWeb.Controllers
         /* ------------------- REMOVER ------------------- */
         public IActionResult Remover(int id)
         {
-            _funcionarioDAO.Remover(id);
+            Funcionario f = _funcionarioDAO.BuscarPorId(id);
+            if (_funcionarioDAO.Remover(f))
+            {
+                TempData["msg"] = "<script>alert('Funcionário removido com sucesso!');</script>";
+            }
+            else
+            {
+                TempData["msg"] = "<script>alert('Não é possivel remover um funcionário com prontuários vinculados!');</script>";
+            }
+
             return RedirectToAction("Index", "Funcionario");
         }
 
@@ -56,9 +67,13 @@ namespace GestaoRHWeb.Controllers
         [HttpPost]
         public IActionResult Alterar(Funcionario funcionario)
         {
-            _funcionarioDAO.Alterar(funcionario);
-
-            return RedirectToAction("Index", "Funcionario");
+            if (ModelState.IsValid)
+            {
+                _funcionarioDAO.Alterar(funcionario);
+                TempData["msg"] = "<script>alert('Alteração realizada com sucesso!');</script>";
+                return RedirectToAction("Index", "Funcionario");
+            }
+            return View(funcionario);
         }
 
     }
