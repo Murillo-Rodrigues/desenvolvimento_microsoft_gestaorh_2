@@ -53,6 +53,7 @@ namespace GestaoRHWeb.Controllers
                 prontuario.Caixa = _caixaDAO.BuscarPorId(prontuario.CaixaId);
                 if (_prontuarioDAO.Cadastrar(prontuario))
                 {
+                    TempData["msg"] = "<script>alert('Prontuário cadastrado com sucesso!');</script>";
                     return RedirectToAction("Index", "Prontuario");
                 }
                 ModelState.AddModelError("", "Não foi possível realizar o cadastro! Dados já vinculados em outro prontuário!");

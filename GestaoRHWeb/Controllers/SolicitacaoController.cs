@@ -1,10 +1,14 @@
 ﻿using GestaoRHWeb.DAL;
 using GestaoRHWeb.Models;
 using GestaoRHWeb.Utils;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace GestaoRHWeb.Controllers
 {
+    [Authorize]
     public class SolicitacaoController : Controller
     {
 
@@ -12,13 +16,15 @@ namespace GestaoRHWeb.Controllers
         private readonly ProntuarioDAO _prontuarioDAO;
         private readonly ItemSolicitacaoDAO _itemSolicitacaoDAO;
         private readonly Sessao _sessao;
+        private readonly UserManager<Usuario> _userManager;
 
-        public SolicitacaoController(SolicitacaoDAO solicitacaoDAO, ProntuarioDAO prontuarioDAO, ItemSolicitacaoDAO itemSolicitacaoDAO, Sessao sessao)
+        public SolicitacaoController(SolicitacaoDAO solicitacaoDAO, ProntuarioDAO prontuarioDAO, ItemSolicitacaoDAO itemSolicitacaoDAO, Sessao sessao, UserManager<Usuario> userManager)
         {
             _solicitacaoDAO = solicitacaoDAO;
             _prontuarioDAO = prontuarioDAO;
             _itemSolicitacaoDAO = itemSolicitacaoDAO;
             _sessao = sessao;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -67,20 +73,29 @@ namespace GestaoRHWeb.Controllers
             itemSolicitacao.Prontuario.Status = "Disponivel";
             Prontuario procurarProntuarioComDados = _prontuarioDAO.BuscarPorIdFuncionarioECaixa(itemSolicitacao.Prontuario.Id);
             _prontuarioDAO.Alterar(procurarProntuarioComDados);
-            _itemSolicitacaoDAO.Remover(id);
             return RedirectToAction("Index", "Solicitacao");
         }
 
-        public IActionResult RegistrarSolicitacao(ItemSolicitacao itens)
+        public IActionResult RegistrarSolicitacao()
         {
-            Solicitacao s = new Solicitacao();
-            s.Itens.Add(
-                new ItemSolicitacao
-                {
-                    Prontuario = itens.Prontuario
-                });
 
+            Solicitacao solicitacao = new Solicitacao
+            {
+                Usuario = User.Identity.Name,
+                CarrinhoId = _sessao.BuscarCarrinhoId()
+            };
+
+            _solicitacaoDAO.Cadastrar(solicitacao);
+
+            TempData["msg"] = "<script>alert('Solicitação realizada!');</script>";
             return RedirectToAction("Index", "Solicitacao");
         }
+        public IActionResult ListarCadastradas()
+        {
+            List<Solicitacao> solicitacoes = _solicitacaoDAO.Listar();
+            return View(solicitacoes);
+        }
+
+
     }
 }

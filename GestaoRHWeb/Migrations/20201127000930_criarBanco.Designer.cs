@@ -4,14 +4,16 @@ using GestaoRHWeb.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GestaoRHWeb.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20201127000930_criarBanco")]
+    partial class criarBanco
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -142,16 +144,20 @@ namespace GestaoRHWeb.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CarrinhoId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("CaixaId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CriadoEm")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Usuario")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("FuncionarioId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CaixaId");
+
+                    b.HasIndex("FuncionarioId");
 
                     b.ToTable("Solicitacoes");
                 });
@@ -402,6 +408,17 @@ namespace GestaoRHWeb.Migrations
                         .HasForeignKey("FuncionarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("GestaoRHWeb.Models.Solicitacao", b =>
+                {
+                    b.HasOne("GestaoRHWeb.Models.Caixa", "Caixa")
+                        .WithMany()
+                        .HasForeignKey("CaixaId");
+
+                    b.HasOne("GestaoRHWeb.Models.Funcionario", "Funcionario")
+                        .WithMany()
+                        .HasForeignKey("FuncionarioId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

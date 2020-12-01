@@ -8,11 +8,12 @@ namespace GestaoRHWeb.Models
     {
         public Solicitacao()
         {
-            Itens = new List<ItemSolicitacao>();
+            Usuario = Usuario;
+            CarrinhoId = CarrinhoId;
         }
 
-        public Funcionario Funcionario { get; set; }
-        public Caixa Caixa { get; set; }
+        public string Usuario { get; set; }
+        public string CarrinhoId { get; set; }
         public List<ItemSolicitacao> Itens { get; set; }
     }
 }

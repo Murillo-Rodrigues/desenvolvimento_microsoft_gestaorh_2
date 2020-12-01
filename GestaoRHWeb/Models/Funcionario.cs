@@ -19,9 +19,5 @@ namespace GestaoRHWeb.Models
         [Required(ErrorMessage = "Campo obrigatório!")]
         public string Nome { get; set; }
 
-        public override string ToString()
-        {
-            return $"{Matricula}";
-        }
     }
 }

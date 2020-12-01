@@ -23,7 +23,6 @@ namespace GestaoRHWeb.Controllers
             itemSolicitacao.Prontuario.Status = "Disponivel";
             Prontuario procurarProntuarioComDados = _prontuarioDAO.BuscarPorIdFuncionarioECaixa(itemSolicitacao.Prontuario.Id);
             _prontuarioDAO.Alterar(procurarProntuarioComDados);
-            _itemSolicitacaoDAO.Remover(id);
             return RedirectToAction("Status", "Solicitacao");
         }
     }
