@@ -60,7 +60,7 @@ else
             <td>@itens.Matricula</td>
             <td>@itens.Custodia</td>
             <td>@itens.CriadoEm</td>
-            <td><a asp-action="Remover" asp-controller="Solicitacao" class="btn btn-danger"> Remover</a></td>
+            <td><a asp-action="Remover" asp-controller="Solicitacao" asp-route-id="@itens.Id" class="btn btn-danger"> Remover</a></td>
         </tr>}
                 </tbody>
             </table>
