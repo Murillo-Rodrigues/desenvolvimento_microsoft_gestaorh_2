@@ -10,8 +10,7 @@
 <fieldset>
     <legend>
         Solicitar Prontuários
-        <a class="btn btn-primary" asp-action="RegistrarSolicitacao"
-           asp-controller="Solicitacao">
+        <a class="btn btn-primary" asp-action="RegistrarSolicitacao" asp-controller="Solicitacao">
             Registrar Solicitação
         </a>
     </legend>
@@ -43,11 +42,10 @@ else
 
         </div>
         <div class="form-group col-8">
-            <table class="table table-hover table-striped table-bordered" style="text-align:center">
+            <table class="table table-hover table-striped table-bordered" id="tabelaTeste" style="text-align:center">
                 <thead>
                     <tr class="table-info">
                         <th scope="row">#</th>
-                        <th scope="col">Prontuario ID</th>
                         <th scope="col">Matrícula Vinculada</th>
                         <th scope="col">Custódia Vinculada</th>
                         <th scope="col">Criado em</th>
@@ -59,13 +57,11 @@ else
                     {
         <tr>
             <td>@itens.Id</td>
-            <td>@itens.Prontuario.Id</td>
             <td>@itens.Matricula</td>
             <td>@itens.Custodia</td>
             <td>@itens.CriadoEm</td>
-            <td><a asp-action="Remover" asp-controller="Solicitacao" asp-route-id="@itens.Id" class="btn btn-danger"> Remover</a></td>
-        </tr>
-}
+            <td><a asp-action="Remover" asp-controller="Solicitacao" class="btn btn-danger"> Remover</a></td>
+        </tr>}
                 </tbody>
             </table>
         </div>
@@ -73,15 +69,11 @@ else
 
 </fieldset>
 
+<script>
+    let tabelaTeste = document.getElementById('tabelaTeste');
+    function cleanTable() {
+        //alert("");
+        var rowCount = tabelaTeste.rows.length; while (--rowCount) tabelaTeste.deleteRow(rowCount);
 
-@*<div id="prontuarios" class="row">
-            @foreach (Prontuario prontuarioCadastrado in Model)
-            {
-    <div class="form-group col-sm-3 solicitacao">
-        <span><b>Matrícula: </b>@prontuarioCadastrado.Funcionario.Matricula</span><br />
-        <span><b>Custódia: </b>@prontuarioCadastrado.Caixa.Custodia</span>
-        <br />
-        <input type="submit" value="Solicitar" class="btn btn-primary" />
-    </div>}
-        </div>
-    </fieldset>*@
+    }
+</script>

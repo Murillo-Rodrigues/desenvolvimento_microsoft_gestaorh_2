@@ -10,11 +10,10 @@
 <fieldset>
     <legend>Status de Solicitações</legend>
 
-    <table class="table table-hover table-striped table-bordered" style="text-align:center">
+    <table class="table table-hover table-striped table-bordered" id="tabelaTeste" style="text-align:center">
         <thead>
             <tr class="table-info">
                 <th scope="row">#</th>
-                <th scope="col">Prontuario ID</th>
                 <th scope="col">Matrícula Vinculada</th>
                 <th scope="col">Custódia Vinculada</th>
                 <th scope="col">Status</th>
@@ -27,13 +26,30 @@
             {
 <tr>
     <td>@itens.Id</td>
-    <td>@itens.Prontuario.Id</td>
     <td>@itens.Matricula</td>
     <td>@itens.Custodia</td>
-    <td style="color:red">@itens.Prontuario.Status</td>
+    @{if (itens.Prontuario.Status == "Disponivel")
+        {
+
+<td>
+    <span style="color: lawngreen;-webkit-text-stroke: 0.5px black;
+">@itens.Prontuario.Status</span>
+</td> }
+                else
+                {
+<td><span style="color:red"><b style="color:black">Status: </b>@itens.Prontuario.Status</span></td>
+ } }
     <td>@itens.CriadoEm</td>
-    <td><a asp-action="Remover" asp-controller="Status" asp-route-id="@itens.Id" class="btn btn-success">Concluir Solicitação</a></td>
-</tr>}
+    @{ if (itens.Prontuario.Status == "Disponivel")
+        {
+<td></td>
+ }
+else
+{
+<td><a asp-action="Remover" asp-controller="Status" asp-route-id="@itens.Id" class="btn btn-success">Concluir Solicitação</a></td>
+ } }
+</tr>
+}
         </tbody>
     </table>
 

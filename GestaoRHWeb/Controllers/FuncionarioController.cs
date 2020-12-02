@@ -1,5 +1,6 @@
 ﻿using GestaoRHWeb.DAL;
 using GestaoRHWeb.Models;
+using GestaoRHWeb.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,12 +33,19 @@ namespace GestaoRHWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_funcionarioDAO.Cadastrar(funcionario))
+                if (Validacao.ValidarCpf(funcionario.Cpf))
                 {
-                    TempData["msg"] = "<script>alert('Funcionário cadastrado com sucesso!');</script>";
-                    return RedirectToAction("Index", "Funcionario");
+                    if (_funcionarioDAO.Cadastrar(funcionario))
+                    {
+                        TempData["msg"] = "<script>alert('Funcionário cadastrado com sucesso!');</script>";
+                        return RedirectToAction("Index", "Funcionario");
+                    }
+                    ModelState.AddModelError("", "Não foi possível cadastrar o funcionário! Já existe um funcionário com a mesma matrícula na base de dados");
                 }
-                ModelState.AddModelError("", "Não foi possível cadastrar o funcionário! Já existe um funcionário com a mesma matrícula na base de dados");
+                else
+                {
+                    ModelState.AddModelError("", "CPF inválido!!");
+                }
             }
             return View(funcionario);
         }

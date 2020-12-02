@@ -73,6 +73,7 @@ namespace GestaoRHWeb.Controllers
             itemSolicitacao.Prontuario.Status = "Disponivel";
             Prontuario procurarProntuarioComDados = _prontuarioDAO.BuscarPorIdFuncionarioECaixa(itemSolicitacao.Prontuario.Id);
             _prontuarioDAO.Alterar(procurarProntuarioComDados);
+            _itemSolicitacaoDAO.Remover(itemSolicitacao.Id);
             return RedirectToAction("Index", "Solicitacao");
         }
 
@@ -88,6 +89,7 @@ namespace GestaoRHWeb.Controllers
             _solicitacaoDAO.Cadastrar(solicitacao);
 
             TempData["msg"] = "<script>alert('Solicitação realizada!');</script>";
+            _sessao.CriarNovaGuid();
             return RedirectToAction("Index", "Solicitacao");
         }
         public IActionResult ListarCadastradas()
@@ -98,4 +100,5 @@ namespace GestaoRHWeb.Controllers
 
 
     }
+
 }

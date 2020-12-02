@@ -21,21 +21,22 @@
         <tbody>
             @foreach (Prontuario prontuarioCadastrado in Model)
             {
-<tr>
-    <td>@prontuarioCadastrado.Id</td>
-    <td>@prontuarioCadastrado.Funcionario.Matricula</td>
-    <td>@prontuarioCadastrado.Caixa.Custodia</td>
-    @{ if (prontuarioCadastrado.Status == "Disponivel")
-        {
-<td style="color:lawngreen; -webkit-text-stroke:0.5px black;">@prontuarioCadastrado.Status</td>
- }
-else
-{
-<td style="color:red">@prontuarioCadastrado.Status</td> } }
-    <td>@prontuarioCadastrado.CriadoEm</td>
-    <td><a asp-action="Remover" asp-controller="Prontuario" asp-route-id="@prontuarioCadastrado.Id" class="btn btn-danger"> Remover</a></td>
-    <td><a asp-action="Alterar" asp-controller="Prontuario" asp-route-id="@prontuarioCadastrado.Id" class="btn btn-warning"> Alterar</a></td>
-</tr>}
+                <tr>
+                    <td>@prontuarioCadastrado.Id</td>
+                    <td>@prontuarioCadastrado.Funcionario.Matricula</td>
+                    <td>@prontuarioCadastrado.Caixa.Custodia</td>
+                    @{ if (prontuarioCadastrado.Status == "Disponivel")
+                        {
+                            <td style="color:lawngreen; -webkit-text-stroke:0.5px black;">@prontuarioCadastrado.Status</td>
+                        }
+                        else
+                        {
+                            <td style="color:red">@prontuarioCadastrado.Status</td>
+ } }
+                    <td>@prontuarioCadastrado.CriadoEm</td>
+                    <td><a asp-action="Remover" asp-controller="Prontuario" asp-route-id="@prontuarioCadastrado.Id" class="btn btn-danger"> Remover</a></td>
+                </tr>
+}
         </tbody>
     </table>
 </fieldset>

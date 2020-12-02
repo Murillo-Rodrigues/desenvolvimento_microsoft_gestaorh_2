@@ -79,6 +79,21 @@ namespace GestaoRHWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Solicitacoes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CriadoEm = table.Column<DateTime>(nullable: false),
+                    Usuario = table.Column<string>(nullable: true),
+                    CarrinhoId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Solicitacoes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Usuarios",
                 columns: table => new
                 {
@@ -86,7 +101,12 @@ namespace GestaoRHWeb.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CriadoEm = table.Column<DateTime>(nullable: false),
                     Email = table.Column<string>(nullable: false),
-                    Senha = table.Column<string>(nullable: false)
+                    Senha = table.Column<string>(nullable: false),
+                    Cep = table.Column<string>(nullable: true),
+                    Logradouro = table.Column<string>(nullable: true),
+                    Bairro = table.Column<string>(nullable: true),
+                    Cidade = table.Column<string>(nullable: true),
+                    Uf = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -228,33 +248,6 @@ namespace GestaoRHWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Solicitacoes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CriadoEm = table.Column<DateTime>(nullable: false),
-                    FuncionarioId = table.Column<int>(nullable: true),
-                    CaixaId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Solicitacoes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Solicitacoes_Caixas_CaixaId",
-                        column: x => x.CaixaId,
-                        principalTable: "Caixas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Solicitacoes_Funcionarios_FuncionarioId",
-                        column: x => x.FuncionarioId,
-                        principalTable: "Funcionarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ItensSolicitacao",
                 columns: table => new
                 {
@@ -341,16 +334,6 @@ namespace GestaoRHWeb.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Prontuarios_FuncionarioId",
                 table: "Prontuarios",
-                column: "FuncionarioId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Solicitacoes_CaixaId",
-                table: "Solicitacoes",
-                column: "CaixaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Solicitacoes_FuncionarioId",
-                table: "Solicitacoes",
                 column: "FuncionarioId");
         }
 

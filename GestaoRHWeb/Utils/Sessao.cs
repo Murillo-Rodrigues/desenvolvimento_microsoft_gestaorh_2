@@ -12,7 +12,15 @@ namespace GestaoRHWeb.Utils
 
         private const string CARRINHO_ID = "CARRINHO_ID";
 
+        public string CriarNovaGuid()
+        {
+            if (_http.HttpContext.Session.GetString(CARRINHO_ID) != null)
+            {
 
+                _http.HttpContext.Session.SetString(CARRINHO_ID, Guid.NewGuid().ToString());
+            }
+            return _http.HttpContext.Session.GetString(CARRINHO_ID);
+        }
 
         public string BuscarCarrinhoId()
         {

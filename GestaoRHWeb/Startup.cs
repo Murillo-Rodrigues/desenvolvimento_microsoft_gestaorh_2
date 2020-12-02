@@ -31,6 +31,7 @@ namespace GestaoRHWeb
             services.AddScoped<Sessao>();
             services.AddHttpContextAccessor();
 
+
             services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("Connection")));
 
             services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<Context>().AddDefaultTokenProviders();
@@ -72,7 +73,12 @@ namespace GestaoRHWeb
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Funcionario}/{action=Index}/{id?}");
+
             });
+
+
+
         }
+
     }
 }

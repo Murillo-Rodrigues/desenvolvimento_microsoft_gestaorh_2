@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GestaoRHWeb.Models
 {
     [Table("Usuarios")]
-    public class UsuarioView: BaseModel
+    public class UsuarioView : BaseModel
     {
-        [Display (Name = "E-mail")]
+        [Display(Name = "E-mail")]
         [Required(ErrorMessage = "Campo obrigatório")]
         [EmailAddress]
         public string Email { get; set; }
@@ -22,7 +18,23 @@ namespace GestaoRHWeb.Models
         [Display(Name = "Confirmação da senha")]
         [Required(ErrorMessage = "Campo obrigatório")]
         [NotMapped]
-        [Compare ("Senha",ErrorMessage = "Campos não coincidem!")]
+        [Compare("Senha", ErrorMessage = "Campos não coincidem!")]
         public string ConfirmacaoSenha { get; set; }
+
+        [Display(Name = "CEP")]
+        public string Cep { get; set; }
+
+        [Display(Name = "Rua")]
+        public string Logradouro { get; set; }
+
+        [Display(Name = "Bairro")]
+        public string Bairro { get; set; }
+
+        [Display(Name = "Cidade")]
+        public string Cidade { get; set; }
+
+        [Display(Name = "Estado")]
+        public string Uf { get; set; }
+
     }
 }

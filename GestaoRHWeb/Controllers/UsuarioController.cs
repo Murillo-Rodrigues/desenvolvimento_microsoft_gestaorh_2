@@ -11,12 +11,14 @@ namespace GestaoRHWeb.Controllers
         private readonly Context _context;
         private readonly UserManager<Usuario> _userManager;
         private readonly SignInManager<Usuario> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UsuarioController(Context context, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager)
+        public UsuarioController(Context context, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
 
         // GET: Usuario
@@ -25,25 +27,8 @@ namespace GestaoRHWeb.Controllers
             return View(await _context.Usuarios.ToListAsync());
         }
 
-        // GET: Usuario/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var usuarioView = await _context.Usuarios
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuarioView == null)
-            {
-                return NotFound();
-            }
-
-            return View(usuarioView);
-        }
-
         // GET: Usuario/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -54,10 +39,11 @@ namespace GestaoRHWeb.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Email,Senha,Id,CriadoEm, ConfirmacaoSenha")] UsuarioView usuarioView)
+        public async Task<IActionResult> Create([Bind("Email,Senha,Id,CriadoEm,ConfirmacaoSenha,Cep,Logradouro,Bairro,Cidade,Uf")] UsuarioView usuarioView)
         {
             if (ModelState.IsValid)
             {
+
                 Usuario usuario = new Usuario
                 {
                     UserName = usuarioView.Email,
@@ -68,6 +54,7 @@ namespace GestaoRHWeb.Controllers
 
                 if (resultado.Succeeded)
                 {
+
                     _context.Add(usuarioView);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
@@ -111,6 +98,7 @@ namespace GestaoRHWeb.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Funcionario");
         }
+
 
     }
 }

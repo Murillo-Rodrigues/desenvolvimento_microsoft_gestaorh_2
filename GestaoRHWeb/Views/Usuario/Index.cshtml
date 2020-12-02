@@ -1,23 +1,20 @@
 ﻿@model IEnumerable<GestaoRHWeb.Models.UsuarioView>
 
-@{
-    ViewData["Title"] = "Index";
-}
-
-<h1>Index</h1>
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+<br />
+<br />
+<br />
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Cadastrar Novo</a>
 </p>
-<table class="table">
+<table class="table table-hover table-bordered table-striped table-info">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Senha)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.CriadoEm)
             </th>
@@ -25,23 +22,17 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Senha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CriadoEm)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.CriadoEm)
+    </td>
+
+</tr>}
     </tbody>
 </table>

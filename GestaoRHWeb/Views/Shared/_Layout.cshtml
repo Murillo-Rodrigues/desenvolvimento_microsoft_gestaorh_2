@@ -80,9 +80,6 @@
                             <i class="fa fa-shopping-cart"></i>
                             @*<span class="badge bg-info"></span>*@
                         </a>
-                        <!-- notification dropdown end -->
-
-
 
                 </ul>
                 <!--  notification end -->
@@ -116,44 +113,44 @@ else
             <div id="sidebar" class="nav-collapse ">
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
-                    <p class="centered">
-                        <a href=""><img src="~/ui-pine.jpg" class="img-circle" width="80"></a>
-                    </p>
-                    <h5 class="centered">Pine Nurse</h5>
-                    <li class="mt">
+                    @*<p class="centered">
+                            <a href=""><img src="~/ui-pine.jpg" class="img-circle" width="80"></a>
+                        </p>
+                        <h5 class="centered">Pine Nurse</h5>*@
+                    <li class="sub-menu">
                         <a asp-action="Index" asp-controller="Funcionario">
-                            <i class="fa fa-dashboard"></i>
+                            <i class="fa fa-list"></i>
                             <span>Tabela de Funcionários</span>
                         </a>
                     </li>
                     <li class="sub-menu">
                         <a asp-action="Index" asp-controller="Caixa">
-                            <i class="fa fa-desktop"></i>
+                            <i class="fa fa-list"></i>
                             <span>Tabela de Caixas</span>
                         </a>
                     </li>
                     <li class="sub-menu">
                         <a asp-action="Index" asp-controller="Prontuario">
-                            <i class="fa fa-cogs"></i>
+                            <i class="fa fa-list"></i>
                             <span>Tabela de Prontuários</span>
                         </a>
                         <br /><br /><br />
                     </li>
                     <li class="sub-menu">
                         <a asp-action="Cadastrar" asp-controller="Funcionario">
-                            <i class="fa fa-book"></i>
+                            <i class="fa fa-user-plus"></i>
                             <span>Cadastro de Funcionários</span>
                         </a>
                     </li>
                     <li class="sub-menu">
                         <a asp-action="Cadastrar" asp-controller="Caixa">
-                            <i class="fa fa-group"></i>
+                            <i class="fa fa-dropbox"></i>
                             <span>Cadastro de Caixas</span>
                         </a>
                     </li>
                     <li class="sub-menu">
                         <a asp-action="Cadastrar" asp-controller="Prontuario">
-                            <i class="fa fa-group"></i>
+                            <i class="fa fa-folder-open"></i>
                             <span>Cadastro de Prontuários</span>
                         </a>
                     </li>
@@ -162,23 +159,37 @@ else
                     <br />
                     <li class="sub-menu">
                         <a asp-action="Index" asp-controller="Solicitacao">
-                            <i class="fa fa-group"></i>
+                            <i class="fas fa-bookmark"></i>
                             <span>Solicitação de Prontuários</span>
                         </a>
                     </li>
                     <li class="sub-menu">
                         <a asp-action="Status" asp-controller="Solicitacao">
-                            <i class="fa fa-group"></i>
+                            <i class="fas fa-print"></i>
                             <span>Status de Solicitações</span>
                         </a>
                     </li>
+
                     <li class="sub-menu">
                         <a asp-action="ListarCadastradas" asp-controller="Solicitacao">
-                            <i class="fa fa-group"></i>
+                            <i class="fa fa-list"></i>
                             <span>Tabela de Solicitações</span>
                         </a>
                     </li>
-
+                    <br />
+                    <br />
+                    <li class="sub-menu">
+                        <a asp-action="Create" asp-controller="Usuario">
+                            <i class="fa fa-group"></i>
+                            <span>Cadastrar Usuários</span>
+                        </a>
+                    </li>
+                    <li class="sub-menu">
+                        <a asp-action="Index" asp-controller="Usuario">
+                            <i class="fa fa-group"></i>
+                            <span>Listar Usuários</span>
+                        </a>
+                    </li>
                 </ul>
                 <!-- sidebar menu end-->
             </div>
@@ -216,6 +227,12 @@ else
         </footer> <!--footer end-->
     </section> <!-- js placed at the end of the document so the pages load faster --> @*<script src="~lib/jquery/jquery.js"></script>*@
 
+
+    <script>
+        function LimparTabela() {
+            $("#tabelaTeste > tbody").html("");
+        }
+    </script>
 
     <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="~/lib/jquery.dcjqaccordion.2.7.js"></script>
